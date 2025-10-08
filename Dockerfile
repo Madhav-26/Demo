@@ -1,11 +1,20 @@
-FROM python:3.8-alpine
+# Use a more stable base image
+FROM python:3.9-slim
 
-COPY . /app
-
+# Set working directory
 WORKDIR /app
 
+# Copy only requirements first (for caching)
+COPY requirements.txt .
 
-RUN pip install -r requirements.txt
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD python app.py
+# Copy the rest of the app
+COPY . .
 
+# Expose the Render port
+EXPOSE 10000
+
+# Command to run the app
+CMD ["python", "app.py"]
