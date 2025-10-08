@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the Render port
-EXPOSE 10000
+EXPOSE 5000
 
 # Command to run the app
 CMD ["python", "app.py"]
